@@ -11,7 +11,7 @@ public class Estado {
     private Boolean initialState;
     private Boolean finalState;
 
-    Estado(int id, String name,String label, Boolean initialState, Boolean finalState){
+    public Estado(int id, String name,String label, Boolean initialState, Boolean finalState){
         this.id = id;
         this.name = name;
         this.label = label;
@@ -37,6 +37,12 @@ public class Estado {
 
     public Boolean getFinalState() {
         return finalState;
+    }
+
+    @Override
+    public String toString() {
+        return "Estado [finalState=" + finalState + ", id=" + id + ", initialState=" + initialState + ", label=" + label
+                + ", name=" + name + "]";
     }
 
     

@@ -23,5 +23,10 @@ public class Transicao {
         return to;
     }
 
+    @Override
+    public String toString() {
+        return "Transicao [from=" + from + ", read=" + read + ", to=" + to + "]";
+    }
+
     
 }
