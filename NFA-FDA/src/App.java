@@ -1,4 +1,5 @@
 
+import controller.ConverteAutomato;
 import controller.ReadFile;
 
 public class App {
@@ -7,5 +8,7 @@ public class App {
         ReadFile rf = new ReadFile(path);
 
         rf.read();
+        System.out.println(ConverteAutomato.afn.toString());
+
     }
 }
