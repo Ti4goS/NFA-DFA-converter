@@ -1,4 +1,5 @@
 
+import controller.ConverteAutomato;
 import controller.ReadFile;
 
 public class App {
@@ -8,5 +9,7 @@ public class App {
         buildMenu tela = new buildMenu();
         rf.read();
         tela.setVisible(true);
+        System.out.println(ConverteAutomato.afn.toString());
+
     }
 }
