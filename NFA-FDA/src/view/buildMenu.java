@@ -11,3 +11,4 @@ public class buildMenu extends JFrame {
         pack();
         setVisible(true);
     }
+}
