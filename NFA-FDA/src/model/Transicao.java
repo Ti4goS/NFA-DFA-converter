@@ -1,17 +1,17 @@
 package model;
 
 public class Transicao {
-    private int from;
-    private int to;
+    private Estado from;
+    private Estado to;
     private String read;
 
-    public Transicao(int from, int to,String read){
+    public Transicao(Estado from, Estado to,String read){
         this.from = from;
         this.to = to;
         this.read = read;
     }
 
-    public int getFrom() {
+    public Estado getFrom() {
         return from;
     }
 
@@ -19,7 +19,7 @@ public class Transicao {
         return read;
     }
 
-    public int getTo() {
+    public Estado getTo() {
         return to;
     }
 
