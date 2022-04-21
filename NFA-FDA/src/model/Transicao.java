@@ -25,7 +25,7 @@ public class Transicao {
 
     @Override
     public String toString() {
-        return "Transicao [from=" + this.from + ", read=" + this.read + ", to=" + this.to + "]";
+        return "Transicao [from=" + this.from.getId() + ", read=" + this.read + ", to=" + this.to.getId() + "]";
     }
 
     

@@ -8,7 +8,5 @@ public class App {
         ReadFile readFile = new ReadFile(path);
         readFile.read();
         ConverteAutomato.converter();
-        //buildMenu tela = new buildMenu();
-        //tela.setVisible(true);
     }
 }

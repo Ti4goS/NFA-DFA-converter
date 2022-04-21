@@ -6,6 +6,7 @@ public class Automato {
     private ArrayList<Estado> estados = new ArrayList<Estado>();
     private ArrayList<Transicao> transicoes = new ArrayList<Transicao>();
     private ArrayList<String> alfabeto = new ArrayList<String>();
+
     
     public Automato() {
     }
@@ -13,7 +14,7 @@ public class Automato {
     Automato(Estado estado, Transicao transicao){
         this.estados.add(estado);
         this.transicoes.add(transicao);
-        if (!this.alfabeto.contains(transicao.getRead())) this.alfabeto.add(transicao.getRead());
+        if (!this.alfabeto.contains(transicao.getRead()) && !transicao.getRead().equals("lambda")) this.alfabeto.add(transicao.getRead());
         
     }
 
@@ -23,7 +24,7 @@ public class Automato {
 
     public void addTransicao(Transicao transicao) {
         this.transicoes.add(transicao);
-        if (!this.alfabeto.contains(transicao.getRead())) this.alfabeto.add(transicao.getRead());
+        if (!this.alfabeto.contains(transicao.getRead()) && !transicao.getRead().equals("lambda")) this.alfabeto.add(transicao.getRead());
     }
 
     public ArrayList<Estado> getEstados() {
