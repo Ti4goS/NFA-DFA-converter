@@ -3,8 +3,8 @@ package view;
 import javax.swing.*;
 
 public class BuildMenu extends JFrame {
-    JButton botao1 = new JButton("Iniciar conversão");//converte automato
-    JButton botao = new JButton("Selecionar o local do arquivo do AFN");
+    JButton botao1 = new JButton("Iniciar conversão");//converte automato.java
+    JButton botao = new JButton("Selecionar o local do arquivo do AFN");//
     JButton botao2 = new JButton("Salvar AFD");
 
     public BuildMenu() {
