@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Automato {
     private ArrayList<Estado> estados = new ArrayList<Estado>();
     private ArrayList<Transicao> transicoes = new ArrayList<Transicao>();
+    private ArrayList<String> alfabeto = new ArrayList<String>();
 
     
     public Automato() {
@@ -13,6 +14,8 @@ public class Automato {
     Automato(Estado estado, Transicao transicao){
         this.estados.add(estado);
         this.transicoes.add(transicao);
+        if (!this.alfabeto.contains(transicao.getRead()) && !transicao.getRead().equals("lambda")) this.alfabeto.add(transicao.getRead());
+        
     }
 
     public void addEstado(Estado estado) {
@@ -21,6 +24,7 @@ public class Automato {
 
     public void addTransicao(Transicao transicao) {
         this.transicoes.add(transicao);
+        if (!this.alfabeto.contains(transicao.getRead()) && !transicao.getRead().equals("lambda")) this.alfabeto.add(transicao.getRead());
     }
 
     public ArrayList<Estado> getEstados() {
@@ -31,10 +35,15 @@ public class Automato {
         return transicoes;
     }
 
+    public ArrayList<String> getAlfabeto() {
+        return alfabeto;
+    }
+    
     @Override
     public String toString() {
-        return "Automato [estados=" + estados + ", transicoes=" + transicoes + "]";
+        return "Automato [alfabeto=" + alfabeto + ", estados=" + estados + ", transicoes=" + transicoes + "]";
     }
+
 
 
 

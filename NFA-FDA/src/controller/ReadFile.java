@@ -98,7 +98,17 @@ public class ReadFile {
                         Posteriormente, se algum valor foi lido incorretamente será tratado
                     */
                     if (line.contains("</transition>&#13;")) {
-                        Transicao transicao = new Transicao(from,to,read);
+
+                        Estado de = null, para = null;
+                        for (Estado estado : ConverteAutomato.afn.getEstados()) {
+                            if(estado.getId()==from) de = estado;
+
+                            if(estado.getId()==to) para = estado;
+                        }
+
+                        if (de == null || para == null) throw new StatesException("O Automato está incompleto");
+                        
+                        Transicao transicao = new Transicao(de,para,read);
                         ConverteAutomato.afn.addTransicao(transicao);
                     }
                 }
