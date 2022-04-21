@@ -1,4 +1,4 @@
-
+import controller.ConverteAutomato;
 import controller.ReadFile;
 import view.BuildMenu;
 
@@ -9,5 +9,6 @@ public class App {
         BuildMenu tela = new BuildMenu();
         rf.read();
         tela.setVisible(true);
+
     }
 }

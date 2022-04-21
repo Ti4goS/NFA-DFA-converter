@@ -1,17 +1,17 @@
 package model;
 
 public class Transicao {
-    private String from;
-    private String to;
+    private Estado from;
+    private Estado to;
     private String read;
 
-    Transicao(String from, String to,String read){
+    public Transicao(Estado from, Estado to,String read){
         this.from = from;
         this.to = to;
         this.read = read;
     }
 
-    public String getFrom() {
+    public Estado getFrom() {
         return from;
     }
 
@@ -19,13 +19,13 @@ public class Transicao {
         return read;
     }
 
-    public String getTo() {
+    public Estado getTo() {
         return to;
     }
 
     @Override
     public String toString() {
-        return "Transicao [from=" + from + ", read=" + read + ", to=" + to + "]";
+        return "Transicao [from=" + this.from.getId() + ", read=" + this.read + ", to=" + this.to.getId() + "]";
     }
 
     
