@@ -13,22 +13,18 @@ import controller.ConverteAutomato;
 import controller.ReadFile;
 
 public class BuildMenu extends JFrame {
+    private int retorno = 1;
+    private String path;
 
-    JButton botao = new JButton("Selecionar o local do arquivo do AFN");// selecionar arquivo
-    JButton botao1 = new JButton("Iniciar conversão");// converte automato.java
-    JButton botao2 = new JButton("Salvar AFD");// salvar na pasta
-
-    JFileChooser escolhe = new JFileChooser();
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("Selecione apenas arquivos jff", "jff");
-    int retorno = 0;
-    String path;
-
-    int extracted() {
-        return escolhe.showOpenDialog(null);
-    }
+    private JFileChooser escolhe = new JFileChooser();
+    private FileNameExtensionFilter filter = new FileNameExtensionFilter("Selecione apenas arquivos jff", "jff");
 
     public BuildMenu() {
         super("Conversor de Autômatos");
+
+        JButton botao = new JButton("Selecionar o local do arquivo do AFN");// selecionar arquivo
+        JButton botao1 = new JButton("Iniciar conversão");// converte automato.java
+        JButton botao2 = new JButton("Salvar AFD");// salvar na pasta
 
         escolhe.setFileFilter(filter);
         this.setLocationRelativeTo(null);
@@ -46,7 +42,7 @@ public class BuildMenu extends JFrame {
                 if (retorno == 0)
                     JOptionPane.showMessageDialog(null, "Não foi informado nenhum diretório");
 
-                if (retorno == JFileChooser.APPROVE_OPTION) {
+                if (retorno == JFileChooser.SAVE_DIALOG){
                     retorno = extracted();
                     JOptionPane.showMessageDialog(null, escolhe.getSelectedFile().getAbsolutePath());
                     path = escolhe.getSelectedFile().getAbsolutePath();
@@ -59,7 +55,7 @@ public class BuildMenu extends JFrame {
         botao1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                if (retorno != 0)
+                if (retorno == 0)
                     ConverteAutomato.converter();
                 else
                     JOptionPane.showMessageDialog(null, "É necessário informar o diretório do arquivo .jff");
@@ -79,5 +75,9 @@ public class BuildMenu extends JFrame {
         pack();
         setVisible(true);
         setSize(240, 160);
+    }
+
+    int extracted() {
+        return escolhe.showOpenDialog(null);   
     }
 }

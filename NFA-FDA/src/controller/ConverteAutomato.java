@@ -18,7 +18,6 @@ public class ConverteAutomato {
         int id = 0;
         int estadosGerados = 0;
         int i = 0;
-        int passou = 0;
 
 
         if (inicial == null)
@@ -41,8 +40,8 @@ public class ConverteAutomato {
                     
                     for (Estado e : estadosAFD.get(id)) getEstados(e, letra);
                     
-                    passou++;
-                    //System.out.println(passou);
+                    
+                   
 
                     if(estados.size()>0){
                         ArrayList<Estado> auxArrayList = new ArrayList<Estado>(estados);
@@ -92,8 +91,7 @@ public class ConverteAutomato {
                     
                         for (Estado e : estadosAFD.get(id)) getEstados(e, letra);
                         
-                        passou++;
-                        //System.out.println(passou);
+                      
     
                         if(estados.size()>0){
                             ArrayList<Estado> auxArrayList = new ArrayList<Estado>(estados);
@@ -144,7 +142,7 @@ public class ConverteAutomato {
 
        // System.out.println(estadosAFD.get(2).containsAll(estadosAFD.get(4)));
         //System.out.println(estadosAFD.toString());
-        //System.out.println(afd.toString());
+        System.out.println(afd.toString());
 
         return true;
     }
@@ -212,17 +210,6 @@ public class ConverteAutomato {
         afd.addTransicao(new Transicao(eFrom, eTo, read));
     }
 
-    private static int procuraID(ArrayList<Estado> lista) {
-        int id  = 0;
-
-        for (id = 0; id < estadosAFD.size(); id++) {
-           if (estadosAFD.get(id).equals(lista)) {
-               return id;
-           }
-        }
-    
-        return -1;
-    }
 
 
 }

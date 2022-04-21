@@ -1,5 +1,3 @@
-import controller.ConverteAutomato;
-import controller.ReadFile;
 import view.BuildMenu;
 
 public class App {
