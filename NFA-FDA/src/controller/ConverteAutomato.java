@@ -18,6 +18,7 @@ public class ConverteAutomato {
         int id = 0;
         int estadosGerados = 0;
         int i = 0;
+        int passou = 0;
 
 
         if (inicial == null)
@@ -30,44 +31,120 @@ public class ConverteAutomato {
         i++;
         estados.clear();
 
+        //System.out.println(estadosAFD);
+
+
         do {
             estadosGerados=0;
 
-            for (String letra : afn.getAlfabeto()) {
-                
-                for (Estado e : estadosAFD.get(id)) getEstados(e, letra);
+                for (String letra : afn.getAlfabeto()) {
+                    
+                    for (Estado e : estadosAFD.get(id)) getEstados(e, letra);
+                    
+                    passou++;
+                    //System.out.println(passou);
 
-                if(estados.size()>0){
-                    ArrayList<Estado> auxArrayList = new ArrayList<Estado>(estados);
+                    if(estados.size()>0){
+                        ArrayList<Estado> auxArrayList = new ArrayList<Estado>(estados);
 
-                    for (Estado e : auxArrayList) getEstados(e, "lambda");
+                        for (Estado e : auxArrayList) getEstados(e, "lambda");
 
-                    auxArrayList.clear();
+                        //System.out.println("\n\nLambda:\n\n" + estados.toString());
+                        auxArrayList.clear();
 
-                    if (!estadosAFD.contains(estados)) {
-                        //System.out.println("não tem");
-                        
-                        estadosAFD.add(i,new ArrayList<Estado>(estados));
-                        addEstadoAFD(i);
-                        estadosGerados++;
-                        addTransicaoAFD(id, i, letra);
-                        i++;
-                    }else{
-                        addTransicaoAFD(id, procuraID(estados), letra); 
+                        boolean contains = false;
+
+                        for (ArrayList<Estado> lista : estadosAFD){
+                            /*if (lista.equals(estados)) {
+                                contains = true;
+                                addTransicaoAFD(id, estadosAFD.indexOf(lista), letra);
+                                break;
+                            }*/
+                         if (lista.containsAll(estados) && lista.size()==estados.size()){
+                                contains = true;
+                                addTransicaoAFD(id, estadosAFD.indexOf(lista), letra);
+                             } 
+                        }
+                           
+                            //System.out.println(estados);
+                        if (!contains) {
+                            //System.out.println("não tem");
+                            estadosAFD.add(i,new ArrayList<Estado>(estados));
+                            addEstadoAFD(i);
+                            estadosGerados++;
+                            addTransicaoAFD(id, i, letra);
+                            i++;
+
+                        }
+                        //adiciona transicao no afd
                     }
+                    estados.clear();
+                    
 
+                }    
+
+                id++;
+
+
+                if (estadosGerados==0 && id<estadosAFD.size()) {
+                    System.out.println("passou");
+                    for (String letra : afn.getAlfabeto()) {
                     
-                    
-                    //adiciona transicao no afd
+                        for (Estado e : estadosAFD.get(id)) getEstados(e, letra);
+                        
+                        passou++;
+                        //System.out.println(passou);
+    
+                        if(estados.size()>0){
+                            ArrayList<Estado> auxArrayList = new ArrayList<Estado>(estados);
+    
+                            for (Estado e : auxArrayList) getEstados(e, "lambda");
+    
+                            //System.out.println("\n\nLambda:\n\n" + estados.toString());
+                            auxArrayList.clear();
+    
+                            boolean contains = false;
+    
+                            for (ArrayList<Estado> lista : estadosAFD){
+                                /*if (lista.equals(estados)) {
+                                    contains = true;
+                                    addTransicaoAFD(id, estadosAFD.indexOf(lista), letra);
+                                    break;
+                                }*/
+
+                                if (lista.containsAll(estados) && lista.size()==estados.size()){
+                                    contains = true;
+                                    addTransicaoAFD(id, estadosAFD.indexOf(lista), letra);
+                                 } 
+                            }
+                               
+            
+                            if (!contains) {
+                                //System.out.println("não tem");
+                                estadosAFD.add(i,new ArrayList<Estado>(estados));
+                                addEstadoAFD(i);
+                                estadosGerados++;
+                                addTransicaoAFD(id, i, letra);
+                                i++;
+    
+                            }
+                            //adiciona transicao no afd
+                        }
+                        estados.clear();
+                        
+    
+                    } 
+                    id++;
                 }
-                estados.clear();
-                
-
-            }    
-            id++; 
         }while(estadosGerados!=0);
 
-        System.out.println(afd.toString());
+        //System.out.println(id);
+
+
+
+       // System.out.println(estadosAFD.get(2).containsAll(estadosAFD.get(4)));
+        //System.out.println(estadosAFD.toString());
+        //System.out.println(afd.toString());
 
         return true;
     }
@@ -92,9 +169,11 @@ public class ConverteAutomato {
     private static void getEstados(Estado inicial, String letra) {
         for (Transicao transicao : afn.getTransicoes()) {
             if (inicial.getId().equals(transicao.getFrom().getId())
-                    && transicao.getRead().equals(letra)) {
+                    && transicao.getRead().equals(letra) 
+                    && !estados.contains(transicao.getTo())) {
                 estados.add(transicao.getTo());
-                getEstados(transicao.getTo(), letra);
+
+               if (letra.equals("lambda")) getEstados(transicao.getTo(), letra);              
             }
         }
     }
@@ -120,6 +199,7 @@ public class ConverteAutomato {
         Estado eFrom = null;
         Estado eTo = null;
 
+        
         for (Estado e : afd.getEstados()) {
             if (e.getId().equals(from)) {
                 eFrom = e;
@@ -143,5 +223,6 @@ public class ConverteAutomato {
     
         return -1;
     }
+
 
 }
