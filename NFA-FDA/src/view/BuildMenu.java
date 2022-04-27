@@ -35,41 +35,14 @@ public class BuildMenu extends JFrame {
         botao2.setBounds(150, 100, 100, 90);
 
         painel.add(botao);
-
-        botao.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                if (retorno == 0)
-                    JOptionPane.showMessageDialog(null, "Não foi informado nenhum diretório");
-
-                if (retorno == JFileChooser.SAVE_DIALOG){
-                    retorno = extracted();
-                    JOptionPane.showMessageDialog(null, escolhe.getSelectedFile().getAbsolutePath());
-                    path = escolhe.getSelectedFile().getAbsolutePath();
-                    ReadFile rf = new ReadFile(path);
-                    rf.read();
-                }
-
-            }
-        });
-        botao1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                if (retorno == 0)
-                    ConverteAutomato.converter();
-                else
-                    JOptionPane.showMessageDialog(null, "É necessário informar o diretório do arquivo .jff");
-            }
-        });
-        botao2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-
-            }
-        });
-
         painel.add(botao1);
         painel.add(botao2);
+        
+        botao.addActionListener(leAfn);
+        botao1.addActionListener(converteAfn);
+        botao2.addActionListener(salvaAfd);
+
+        
         add(painel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
@@ -80,5 +53,39 @@ public class BuildMenu extends JFrame {
     int extracted() {
         return escolhe.showOpenDialog(null);   
     }
+
+    private ActionListener leAfn = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            if (retorno == 0)
+                JOptionPane.showMessageDialog(null, "Não foi informado nenhum diretório");
+
+            if (retorno == JFileChooser.SAVE_DIALOG){
+                retorno = extracted();
+                JOptionPane.showMessageDialog(null, escolhe.getSelectedFile().getAbsolutePath());
+                path = escolhe.getSelectedFile().getAbsolutePath();
+                ReadFile rf = new ReadFile(path);
+                rf.read();
+            }
+
+        }
+    };
+
+    private ActionListener converteAfn = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            if (retorno == 0)
+                ConverteAutomato.converter();
+            else
+                JOptionPane.showMessageDialog(null, "É necessário informar o diretório do arquivo .jff");
+        }
+    };
+
+    private ActionListener salvaAfd = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+
+        }
+    };
 }
 
